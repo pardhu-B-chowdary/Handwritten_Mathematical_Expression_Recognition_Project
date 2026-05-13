@@ -13,9 +13,12 @@ from transformers import (
 # CONFIG
 # -----------------------------
 
-load_dotenv()
-HF_MODEL = os.environ.get("HF_MODEL")
-LOCAL_MODEL_PATH = os.environ.get("LOCAL_MODEL_PATH")
+# load_dotenv()
+# HF_MODEL = os.environ.get("HF_MODEL")
+# LOCAL_MODEL_PATH = os.environ.get("LOCAL_MODEL_PATH")
+
+HF_MODEL = "hoang-quoc-trung/sumen-base"
+LOCAL_MODEL_PATH = "./models/sumen-base"
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 

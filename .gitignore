@@ -2,7 +2,5 @@ __pycache__/
 .venv/
 models/sumen-base/
 *.pkl
-*.png
-*.jpg
 .env
 .env.example

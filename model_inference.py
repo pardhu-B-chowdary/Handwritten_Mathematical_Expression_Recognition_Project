@@ -1,4 +1,3 @@
-print("Got Model")
 import os
 import torch
 from PIL import Image

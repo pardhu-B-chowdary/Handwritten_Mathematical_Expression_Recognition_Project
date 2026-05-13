@@ -1,0 +1,162 @@
+:root {
+    --stroke_color: #000000;
+}
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    gap: 20px;
+    min-height: 100vh;
+
+    background-color: oklch(20.729% 0.10878 270.582);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #fff;
+    text-align: center;
+}
+
+
+
+/* Main Section */
+.hero,
+.right{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 700px;
+    
+}
+
+/* Hide default file input */
+input[type="file"] {
+    display: none;
+}
+
+/* Custom file upload button style */
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #4a90e2;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-bottom: 10px;
+}
+
+.custom-file-upload:hover {
+    background-color: #357abd;
+}
+
+/* Image preview container */
+.preview-container {
+    display: none;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+/* Image preview styles */
+.preview-image {
+    max-width: 100%;
+    max-height: 250px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* General button styling */
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    background-color: #6c757d;
+}
+
+button:hover {
+    background-color: #5a6268;
+}
+
+.primary-btn {
+    background-color: #2ecc71;
+}
+
+.primary-btn:hover {
+    background-color: #27ae60;
+}
+
+/* Canvas */
+canvas{
+    width: 100%;
+    max-width: 100%;
+}
+.canvas-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Textarea */
+textarea{
+    width: 100%;
+    max-width: 100%;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+/* Mobile Layout */
+@media screen and (max-width: 1024px) {
+
+    body {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .hero{
+        display: flex;
+        width: 100%;
+        max-width: 100%;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+
+        canvas{
+            width: 90%;
+        }
+
+    }
+    .right{
+        width: 100%;
+        max-width: 100%;
+        
+        textarea{
+            width: auto;
+        }
+    }
+    
+
+    button{
+        width: auto;
+    }
+
+    .custom-file-upload{
+        width: 100%;
+    }
+}

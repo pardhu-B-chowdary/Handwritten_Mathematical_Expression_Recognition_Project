@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, jsonify
-import os
 from flask_socketio import SocketIO, join_room, emit
-
+import os, requests
 from model_inference import run_inference
 
 app = Flask(__name__)
@@ -14,11 +13,46 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
+# =========================
+# MODEL CONFIG
+# =========================
+
+USE_COLAB = True # False means use local model
+
+COLAB_API = "https://snarl-legwarmer-unread.ngrok-free.dev/"
+
 
 @app.route("/")
 def index():
     return render_template("index.html")
 
+def inference(filepath):
+
+    if USE_COLAB:
+
+        with open(filepath, "rb") as f:
+
+            response = requests.post(
+                COLAB_API,
+                files={"image": f}
+            )
+        
+        print(response.text)
+
+        try:
+            result = response.json()
+
+            return result.get("latex")
+
+        except Exception:
+
+            print("Invalid Response:", response.text)
+
+            raise Exception("Invalid response from Colab API")
+
+    else:
+
+        return run_inference(filepath)
 
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -39,7 +73,7 @@ def predict():
 
     try:
 
-        latex = run_inference(filepath)
+        latex = inference(filepath)
 
         return jsonify({
             "latex": latex

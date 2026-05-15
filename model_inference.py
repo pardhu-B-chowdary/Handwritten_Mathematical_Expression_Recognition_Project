@@ -1,4 +1,4 @@
-import os
+import os, time, re
 import torch
 from PIL import Image
 from dotenv import load_dotenv
@@ -95,8 +95,49 @@ def run_inference(image_path):
 
     return sequence.strip()
 
+def normalize_latex(text):
+
+    text = text.lower()
+
+    # remove spaces/newlines
+    text = re.sub(r"\s+", "", text)
+
+    # remove wrappers
+    remove_tokens = [
+        "\\left",
+        "\\right",
+        "$",
+        "\\displaystyle",
+        "\\!",
+        "\\;",
+        "\\,",
+        "\\:",
+    ]
+
+    for token in remove_tokens:
+        text = text.replace(token, "")
+
+    return text.strip()
+
+def exact_match(preds, refs):
+
+  correct = 0
+
+  for p, r in zip(preds, refs):
+
+      if p == r:
+          correct += 1
+
+  return correct / len(refs)
 
 if __name__ == "__main__":
     print("Running inference...")
-    result = run_inference("./uploads/images/5.png")
-    print(result)
+    print("================")
+    actual = "\\mathrm { T r } \; \gamma ^ { 0 } R _ { 1 / 2 , n } ( \omega ) \propto \omega R _ { n } ( \omega ) \ge 0 \qquad \mathrm { f o r ~ \ o m e g a \ge 0 ~ } ,"
+    print("Actual:", normalize_latex(actual))
+    stt = time.time()
+    result = run_inference("dataset/download.png")
+    ett = time.time()
+    print("Predicted:", normalize_latex(result))
+    print(f"Time taken: {ett - stt} seconds")
+    print(f"Exact match: {exact_match(normalize_latex(actual), normalize_latex(result))}")

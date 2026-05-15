@@ -1,0 +1,14 @@
+D:\College_Files\M.Tech\2-sem\Mini_project\Codes\flask_api_connect\model_inference.py:136: SyntaxWarning: invalid escape sequence '\;'
+  actual = "\\mathrm { T r } \; \gamma ^ { 0 } R _ { 1 / 2 , n } ( \omega ) \propto \omega R _ { n } ( \omega ) \ge 0 \qquad \mathrm { f o r ~ \ o m e g a \ge 0 ~ } ,"
+Using device: cpu
+Loading model...
+Loading weights: 100%|██████████████████████████████████████████████████████████████████████████████████████| 640/640 [00:00<00:00, 5507.92it/s]
+Model loaded successfully
+Running inference...
+================
+Actual: \mathrm{tr}\gamma^{0}r_{1/2,n}(\omega)\propto\omegar_{n}(\omega)\ge0\qquad\mathrm{for~\omega\ge0~},
+running inference
+Predicted: \mathrm{tr}\gamma^{0}r_{1/2,n}(\omega)\propto\omegar_{n}(\omega)\ge0\qquad\mathrm{for~\omega\ge0~},
+Time taken: 14.378942012786865 seconds
+Exact match: 1.0
+(.venv) PS D:\College_Files\M.Tech\2-sem\Mini_project\Codes\flask_api_connect> 

@@ -1,0 +1,52 @@
+wandb:
+  enable: False
+  key: ~
+  project_name: ~
+
+huggingface_hub:
+  enable: False
+  hub_model_id: ~
+  hub_token: ~
+
+datasets:
+  num_workers: 4
+  train:
+    images_root: ~
+    dataframe_path: ~
+    batch_size: 8
+  eval:
+    images_root: ~
+    dataframe_path: ~
+    batch_size: 8
+  test:
+    images_root: ~
+    dataframe_path: ~
+    batch_size: 8
+
+hyperparams:
+  pretrained_model_name_or_path: hoang-quoc-trung/sumen-small
+  save_dir: ~
+  epochs: 10
+  eval_steps: 50
+  save_steps: 50
+  logging_steps: 1
+  gradient_accumulation_steps: 256
+  random_seed: 0
+  optimizer:
+    lr: 1e-4
+    weight_decay: 1e-2
+    beta1: 0.95
+    beta2: 0.98
+  warmup_steps: 200
+  max_length: 512
+  num_beams: 4
+  early_stopping: True
+  length_penalty: 1.0
+  image_size: [224, 468]
+  fine_tune_lora_adapter:
+    enable: False
+    adapter_name: fine_tune_handwritten_math_formula
+    alpha: 64
+    dropout: 0.05
+    r: 32
+    target_modules: ["q_proj", "v_proj", "k_proj", "out_proj", "query", "key", "value"]

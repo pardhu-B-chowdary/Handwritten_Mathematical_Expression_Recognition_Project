@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from flask_socketio import SocketIO, join_room, emit
 import os, requests
-from model_inference import run_inference
+# from model_inference import run_inference
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
@@ -27,31 +27,20 @@ def index():
     return render_template("index.html")
 
 def inference(filepath):
-
     if USE_COLAB:
-
         with open(filepath, "rb") as f:
-
             response = requests.post(
                 COLAB_API,
                 files={"image": f}
             )
-        
         print(response.text)
-
         try:
             result = response.json()
-
             return result.get("latex")
-
         except Exception:
-
             print("Invalid Response:", response.text)
-
             raise Exception("Invalid response from Colab API")
-
     else:
-
         return run_inference(filepath)
 
 @app.route("/predict", methods=["POST"])

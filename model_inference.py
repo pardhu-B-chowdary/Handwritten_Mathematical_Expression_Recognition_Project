@@ -1,7 +1,6 @@
 import os, time, re
 import torch
 from PIL import Image
-from dotenv import load_dotenv
 
 from transformers import (
     AutoProcessor,
@@ -12,10 +11,6 @@ from transformers import (
 # -----------------------------
 # CONFIG
 # -----------------------------
-
-# load_dotenv()
-# HF_MODEL = os.environ.get("HF_MODEL")
-# LOCAL_MODEL_PATH = os.environ.get("LOCAL_MODEL_PATH")
 
 HF_MODEL = "hoang-quoc-trung/sumen-base"
 LOCAL_MODEL_PATH = "./models/sumen-base"
@@ -51,6 +46,26 @@ processor = AutoProcessor.from_pretrained(
 
 print("Model loaded successfully")
 
+# -----------------------------
+# Load image correctly
+# -----------------------------
+def load_formula_image(image_path):
+
+    # Preserve transparency first
+    img = Image.open(image_path).convert("RGBA")
+
+    # Create white background
+    white_bg = Image.new("RGBA", img.size, (255, 255, 255, 255))
+
+    # Blend image with white background
+    img = Image.alpha_composite(white_bg, img)
+
+    # Convert to RGB for model
+    img = img.convert("RGB")
+
+    return img
+
+
 
 # -----------------------------
 # INFERENCE FUNCTION
@@ -58,9 +73,7 @@ print("Model loaded successfully")
 
 def run_inference(image_path):
     print("running inference")
-
     image = Image.open(image_path).convert("RGB")
-
     pixel_values = processor.image_processor(
         image,
         return_tensors="pt"
@@ -133,11 +146,4 @@ def exact_match(preds, refs):
 if __name__ == "__main__":
     print("Running inference...")
     print("================")
-    actual = "\\mathrm { T r } \; \gamma ^ { 0 } R _ { 1 / 2 , n } ( \omega ) \propto \omega R _ { n } ( \omega ) \ge 0 \qquad \mathrm { f o r ~ \ o m e g a \ge 0 ~ } ,"
-    print("Actual:", normalize_latex(actual))
-    stt = time.time()
-    result = run_inference("dataset/download.png")
-    ett = time.time()
-    print("Predicted:", normalize_latex(result))
-    print(f"Time taken: {ett - stt} seconds")
-    print(f"Exact match: {exact_match(normalize_latex(actual), normalize_latex(result))}")
+    print(run_inference("uploads/cropped_image.png"))

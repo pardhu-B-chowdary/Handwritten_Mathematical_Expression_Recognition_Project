@@ -24,13 +24,16 @@ COLAB_API = "https://snarl-legwarmer-unread.ngrok-free.dev/"
 
 @app.route("/")
 def index():
+    if USE_COLAB:
+        response = requests.get(COLAB_API)
+    print(response.text)
     return render_template("index.html")
 
 def inference(filepath):
     if USE_COLAB:
         with open(filepath, "rb") as f:
             response = requests.post(
-                COLAB_API,
+                f"{COLAB_API}/predict",
                 files={"image": f}
             )
         print(response.text)

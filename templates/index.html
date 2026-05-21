@@ -3,7 +3,10 @@
   <head>
     <title>HMER App</title>
     <link rel="stylesheet" href="./static/style.css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" rel="stylesheet" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="hero">
@@ -14,12 +17,7 @@
           <label for="imageInput" class="custom-file-upload">
             Choose Image
           </label>
-          <input
-            type="file"
-            name="image"
-            id="imageInput"
-            accept="image/*"
-          />
+          <input type="file" name="image" id="imageInput" accept="image/*" />
           <div id="imagePreviewContainer" class="preview-container">
             <img
               id="imagePreview"
@@ -31,7 +29,7 @@
         </form>
       </div>
 
-      <div class="canvas-section" style="margin-bottom: 20px">
+      <!-- <div class="canvas-section" style="margin-bottom: 20px">
         <h2>Or Draw Math Here</h2>
         <canvas
           id="canvas"
@@ -50,14 +48,22 @@
         >
           Clear
         </button>
-      </div>
-
+      </div> -->
     </div>
     <div class="right">
       <div style="text-align: center; margin-top: 10px; padding: 10px">
-        <div style="text-align: center; margin: 20px;">
-          <button type="button" id="globalPredictBtn" class="primary-btn">Predict</button>
-          <button type="button" id="cancelPredictBtn" class="primary-btn" style="background-color: #e74c3c; display: none;">Cancel</button><br>
+        <div style="text-align: center; margin: 20px">
+          <button type="button" id="globalPredictBtn" class="primary-btn">
+            Predict
+          </button>
+          <button
+            type="button"
+            id="cancelPredictBtn"
+            class="primary-btn"
+            style="background-color: #e74c3c; display: none"
+          >
+            Cancel</button
+          ><br />
         </div>
         <button
           id="connectMobileBtn"

@@ -1,4 +1,6 @@
-This Repo is part of My M.Tech Major Project contating files of the program and model
+This Repo is part of My M.Tech Major Project contating files of the program and model.
+
+This project is a deep learning-based system for recognizing handwritten and printed mathematical expressions from images and converting them into structured LaTeX format. The system uses a Vision Encoder–Decoder Transformer for mathematical expression recognition, with image preprocessing and beam search decoding to improve prediction quality. The generated LaTeX can be viewed as editable code and rendered visually using MathJax through a Flask-based web interface.
 
 # Setup
 1. Create a Virtual Environemtn and activate it <br>
